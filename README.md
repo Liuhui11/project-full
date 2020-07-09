@@ -38,3 +38,15 @@ git push -u origin master
   npm i
   npm run dev
 ```
+
+### 代码规范
+使用husky插件
+```json
+  npm install husky --save-dev
+  // 在package.json中配置
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint && npm run test" // 提交之前做代码拦截
+    }
+  },
+```
