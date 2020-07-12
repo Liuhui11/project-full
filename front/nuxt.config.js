@@ -36,7 +36,8 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
-    '@/plugins/element-ui'
+    '@/plugins/element-ui',
+    '@/plugins/axios'
   ],
   /*
   ** Auto import components
@@ -53,7 +54,7 @@ export default {
   */
   modules: [
     // Doc: https://axios.nuxt.org/usage
-    // '@nuxtjs/axios',
+    '@nuxtjs/axios',
     '@nuxtjs/proxy'
   ],
   /*

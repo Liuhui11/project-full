@@ -7,8 +7,15 @@
     "declarations": true
   },
   "dependencies": {
+    "acorn": "^6.4.1",
+    "co-mocha": "^1.2.2",
     "egg": "^2.15.1",
+    "egg-mongoose": "^3.2.0",
+    "egg-router-group": "^1.1.0",
     "egg-scripts": "^2.11.0",
+    "egg-validate": "^2.0.2",
+    "jsonwebtoken": "^8.5.1",
+    "md5": "^2.2.1",
     "svg-captcha": "^1.4.0"
   },
   "devDependencies": {
@@ -24,11 +31,11 @@
   "engines": {
     "node": ">=10.0.0"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint && npm run test"
-    }
-  },
+  // "husky": {
+  //   "hooks": {
+  //     "pre-commit": "npm run lint && npm run test"
+  //   }
+  // },
   "scripts": {
     "start": "egg-scripts start --daemon --title=egg-server-server",
     "stop": "egg-scripts stop --title=egg-server-server",

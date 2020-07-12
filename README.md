@@ -10,6 +10,7 @@
   git branch dev // 新建分支
   git checkout dev // 切换分支
   git push --set-upstream origin login // 将本地分支推送关联远程分支
+
 ```
 
 - 在远程新建一个仓库
@@ -23,4 +24,11 @@
 ```js
 git remote add origin https://github.com/Liuhui11/project-full.git
 git push -u origin master 
+```
+
+## NPM
+
+```js
+设置淘宝镜像：npm config set registry http://registry.npm.taobao.org
+查看当前镜像：npm get registry
 ```
