@@ -37,5 +37,8 @@ module.exports = appInfo => {
         options: { useUnifiedTopology: true },
       },
     },
+    jwt: {
+      secret: 'Hayley@123',
+    },
   };
 };

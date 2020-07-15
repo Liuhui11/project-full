@@ -1,5 +1,6 @@
 'use strict';
 const md5 = require('md5');
+const jwt = require('jsonwebtoken');
 const BaseController = require('./base');
 const HashSalt = ':Kaikeba@good!@123';
 
@@ -11,12 +12,31 @@ const createRule = {
 };
 
 class UserController extends BaseController {
-//   async login() {
-
-  //   }
+  async login() {
+    const { ctx, app } = this;
+    const { email, captcha, password } = ctx.request.body;
+    if (captcha.toUpperCase() !== ctx.session.captcha.toUpperCase()) {
+      this.error('验证码错误');
+    }
+    const user = await ctx.model.User.findOne({
+      email,
+      password: md5(password + HashSalt),
+    });
+    if (!user) {
+      return this.error('用户名密码错误');
+    }
+    // 用户的信息加密成token返回
+    const token = jwt.sign({
+      _id: user._id,
+      email,
+    }, app.config.jwt.secret, {
+      expiresIn: '1h',
+    });
+    this.success({ token, email, nickname: user.nickname });
+  }
 
   async register() {
-    const { ctx } = this;
+    const { ctx } = this; // ctx是什么？this是什么？
     try {
       // 校验传递的参数
       ctx.validate(createRule);
@@ -28,26 +48,22 @@ class UserController extends BaseController {
     // 获取数据
     const { email, password, captcha, nickname } = ctx.request.body;
     console.log(email, password, captcha, nickname);
-
-    if (captcha.toUpperCase() === ctx.session.captcha.toUpperCase()) {
-      // 邮箱是不是重复了
-      if (await this.checkEmail(email)) {
-        this.error('邮箱重复了');
-      } else {
-        const ret = await ctx.model.User.create({
-          email,
-          nickname,
-          password: md5(password + HashSalt),
-        });
-        if (ret._id) {
-          this.message('注册成功');
-        }
-      }
-    } else {
+    if (captcha.toUpperCase() !== ctx.session.captcha.toUpperCase()) {
       this.error('验证码错误');
     }
-
-    // this.success({ name: 'kkb' })
+    // 邮箱是不是重复了
+    if (await this.checkEmail(email)) {
+      this.error('邮箱重复了');
+    } else {
+      const ret = await ctx.model.User.create({
+        email,
+        nickname,
+        password: md5(password + HashSalt),
+      });
+      if (ret._id) {
+        this.message('注册成功');
+      }
+    }
   }
 
   async checkEmail(email) {
@@ -56,12 +72,12 @@ class UserController extends BaseController {
   }
   async verify() {
     // 校验用户名是否存在
-
+    console.log('verify');
   }
 
-  // async info() {
-
-  // }
+  async info() {
+    console.log('info');
+  }
 }
 
 module.exports = UserController;
