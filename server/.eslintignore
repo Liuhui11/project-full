@@ -1,1 +1,7 @@
-coverage
+!.*
+#node_modules/
+coverage/
+junit/
+dist/
+mobiles/
+!node_modules/some-package/

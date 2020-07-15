@@ -24,18 +24,18 @@
 </template>
 <script>
 export default {
-    layout: 'login',
-    data() {
-      return {
-        captchaUrl: '/api/captcha',
-        rules: ['']
-      }
-    },
-    methods: {
-      updateCaptcha() {
-        this.captchaUrl = `/api/captcha?_t=${new Date().getTime()}`
-      }
-    },
+  layout: 'login',
+  data() {
+    return {
+      captchaUrl: '/api/captcha',
+      rules: ['']
+    }
+  },
+  methods: {
+    updateCaptcha() {
+      this.captchaUrl = `/api/captcha?_t=${new Date().getTime()}`
+    }
+  },
 }
 </script>
 <style lang="stylus">

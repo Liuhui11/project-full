@@ -5,9 +5,8 @@
 </template>
 <script>
 export default {
-    layout: 'blog'
+  layout: 'blog'
 }
 </script>
 <style lang="stylus">
-
 </style>

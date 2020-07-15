@@ -6,10 +6,10 @@
       </el-form-item>
 
       <el-form-item prop="captcha" label="验证码" class="captcha-container">
-            <div class="captcha" @click="updateCaptcha">
-                <img :src="code.captcha" alt="">
-            </div>
-            <el-input v-model="form.captcha" placeholder="请输入验证码"></el-input>
+        <div class="captcha" @click="updateCaptcha">
+            <img :src="code.captcha" alt="">
+        </div>
+        <el-input v-model="form.captcha" placeholder="请输入验证码"></el-input>
       </el-form-item>
 
       <el-form-item prop="nickname" label="昵称">
@@ -37,28 +37,28 @@ export default {
     data() {
       return {
         rules: {
-            email: [
-                {require: true, message: '请输入邮箱'},
-                {type: 'email', message: '请输入正确的邮箱格式'}
-            ],
-            captcha: [
-                {require: true, message: '请输入验证码'},
-            ],
-            nickname: [
-                {require: true, message: '请输入昵称'},
-            ],
-            password: [
-                {require: true, message: '请输入6~12位密码'},
-            ],
-            repeatPassword: [
-                {require: true, message: '请再次输入密码'},
-                {validator: (rule, value, callback) => {
-                    if(value !== this.form.password) {
-                        callback(new Error('两次密码不一致'));
-                    }
-                    callback();
-                }},
-            ],
+          email: [
+            {require: true, message: '请输入邮箱'},
+            {type: 'email', message: '请输入正确的邮箱格式'}
+          ],
+          captcha: [
+            {require: true, message: '请输入验证码'},
+          ],
+          nickname: [
+            {require: true, message: '请输入昵称'},
+          ],
+          password: [
+            {require: true, message: '请输入6~12位密码'},
+          ],
+          repeatPassword: [
+            {require: true, message: '请再次输入密码'},
+            {validator: (rule, value, callback) => {
+              if(value !== this.form.password) {
+                  callback(new Error('两次密码不一致'));
+              }
+              callback();
+            }},
+          ],
         },
         form: {
             email: '894506380@qq.com',
