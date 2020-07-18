@@ -14,9 +14,12 @@ const createRule = {
 class UserController extends BaseController {
   async login() {
     const { ctx, app } = this;
-    const { email, captcha, password } = ctx.request.body;
+    const { email, captcha, password, emailCode } = ctx.request.body;
     if (captcha.toUpperCase() !== ctx.session.captcha.toUpperCase()) {
       this.error('验证码错误');
+    }
+    if (emailCode.toUpperCase() !== ctx.session.emailCode.toUpperCase()) {
+      this.error('邮箱验证码错误');
     }
     const user = await ctx.model.User.findOne({
       email,
@@ -77,6 +80,11 @@ class UserController extends BaseController {
 
   async info() {
     console.log('info');
+    // 你还不知道是哪个邮件 需要从token里取读取
+    const { ctx } = this;
+    const { email } = ctx.state;
+    const user = await this.checkEmail(email);
+    this.success(user);
   }
 }
 
