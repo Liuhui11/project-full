@@ -1,6 +1,7 @@
 /* eslint valid-jsdoc: "off" */
 
 'use strict';
+const path = require('path');
 
 /**
  * @param {Egg.EggAppInfo} appInfo app info
@@ -14,6 +15,13 @@ module.exports = appInfo => {
 
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_1594298846451_8090';
+
+  // upload file
+  config.multipart = {
+    mode: 'file',
+    whitelist: () => true,
+  };
+  config.UPLOAD_DIR = path.resolve(__dirname, '..', 'app/public'); // 存放文件到项目指定目录
 
   // add your middleware config here
   config.middleware = [];
