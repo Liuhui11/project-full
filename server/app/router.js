@@ -13,6 +13,7 @@ module.exports = app => {
   router.get('/sendCode', controller.util.sendCode);
   // 文件上传
   router.post('/uploadFile', controller.util.uploadFile);
+  router.post('/mergeFile', controller.util.mergeFile);
   // 注册
   router.group({ name: 'user', prefix: '/user' }, router => {
     const { info, register, login, verify } = controller.user;
